@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MRVault — CBAM-Ready Carbon Credit MRV Platform</title>
+  <meta name="description" content="MRVault: Open-source Measurement, Reporting & Verification platform for industries facing EU CBAM. IPCC-grade emission calculations, blockchain-verified credits, regulatory compliance." />
+  <meta property="og:title" content="MRVault — CBAM-Ready Carbon Credit MRV Platform" />
+  <meta property="og:description" content="Don't let CBAM catch you off guard. MRVault provides IPCC-grade MRV for textile, cement, automotive, fertilizer & real estate industries." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --emerald-400: #34d399; --emerald-500: #10b981; --emerald-600: #059669;
+      --emerald-700: #047857; --emerald-800: #065f46; --emerald-900: #064e3b;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-300: #d1d5db;
+      --gray-400: #9ca3af; --gray-500: #6b7280; --gray-600: #4b5563; --gray-700: #374151;
+      --gray-800: #1f2937; --gray-900: #111827; --gray-950: #030712;
+      --red-500: #ef4444; --red-600: #dc2626; --amber-500: #f59e0b; --blue-500: #3b82f6;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--gray-900); background: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-200); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.5rem; }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.25rem; }
+    .nav-logo-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--emerald-600), var(--emerald-800)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 0.7rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gray-900); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1.25rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--emerald-600); color: #fff; }
+    .btn-primary:hover { background: var(--emerald-700); }
+    .btn-outline { background: transparent; color: var(--gray-700); border: 1px solid var(--gray-300); }
+    .btn-outline:hover { background: var(--gray-50); border-color: var(--gray-400); }
+    .btn-dark { background: var(--gray-900); color: #fff; }
+    .btn-dark:hover { background: var(--gray-800); }
+    .btn-lg { padding: 0.875rem 2rem; font-size: 1rem; border-radius: 0.75rem; }
+    .btn-white { background: #fff; color: var(--gray-900); }
+    .btn-white:hover { background: var(--gray-100); }
+    .gh-icon { width: 16px; height: 16px; }
+
+    /* HERO */
+    .hero { padding: 8rem 1.5rem 4rem; background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 30%, #fff 60%, #eff6ff 100%); text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 50%, rgba(16,185,129,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 30%, rgba(59,130,246,0.06) 0%, transparent 50%); pointer-events: none; }
+    .hero-inner { max-width: 900px; margin: 0 auto; position: relative; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--red-600); color: #fff; padding: 0.375rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.02em; animation: pulse-badge 2s ease-in-out infinite; }
+    @keyframes pulse-badge { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 0 8px rgba(220,38,38,0); } }
+    .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+    .hero h1 span { color: var(--emerald-600); }
+    .hero p { font-size: 1.2rem; color: var(--gray-600); max-width: 650px; margin: 0 auto 2rem; line-height: 1.7; }
+    .hero-buttons { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .hero-screenshot { margin-top: 3.5rem; border-radius: 1rem; border: 1px solid var(--gray-200); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); overflow: hidden; background: var(--gray-100); }
+    .hero-screenshot img { width: 100%; }
+    .screenshot-label { display: block; text-align: center; font-size: 0.8rem; color: var(--gray-400); margin-top: 0.75rem; }
+
+    /* CBAM URGENCY */
+    .cbam-section { padding: 5rem 1.5rem; background: var(--gray-950); color: #fff; }
+    .cbam-inner { max-width: 1100px; margin: 0 auto; }
+    .cbam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .cbam-badge { display: inline-flex; align-items: center; gap: 0.375rem; background: rgba(239,68,68,0.15); color: #fca5a5; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid rgba(239,68,68,0.3); }
+    .cbam-section h2 { font-size: 2.25rem; font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+    .cbam-section h2 em { color: var(--red-500); font-style: normal; }
+    .cbam-text { color: #9ca3af; font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.5rem; }
+    .cbam-text strong { color: #e5e7eb; }
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item { display: flex; gap: 1.25rem; padding: 1.25rem 0; border-left: 2px solid var(--gray-700); padding-left: 1.5rem; position: relative; }
+    .tl-item::before { content: ''; position: absolute; left: -6px; top: 1.5rem; width: 10px; height: 10px; border-radius: 50%; background: var(--gray-600); border: 2px solid var(--gray-950); }
+    .tl-item.done::before { background: var(--emerald-500); }
+    .tl-item.now::before { background: var(--red-500); box-shadow: 0 0 0 4px rgba(239,68,68,0.2); }
+    .tl-year { font-size: 0.875rem; font-weight: 700; color: var(--amber-500); min-width: 50px; }
+    .tl-item.now .tl-year { color: var(--red-500); }
+    .tl-text { font-size: 0.875rem; color: var(--gray-400); line-height: 1.5; }
+    .tl-text strong { color: #fff; }
+
+    /* COUNTRIES */
+    .countries-section { padding: 5rem 1.5rem; background: var(--gray-50); }
+    .countries-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .section-overline { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--emerald-600); margin-bottom: 0.75rem; }
+    .section-title { font-size: 2.25rem; font-weight: 800; line-height: 1.15; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .section-subtitle { font-size: 1.1rem; color: var(--gray-500); max-width: 650px; margin: 0 auto 3rem; line-height: 1.7; }
+    .countries-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .country-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 0.75rem; padding: 1.25rem 1rem; text-align: center; transition: all 0.2s; }
+    .country-card:hover { border-color: var(--emerald-400); box-shadow: 0 4px 12px rgba(16,185,129,0.1); }
+    .country-flag { font-size: 2rem; margin-bottom: 0.5rem; }
+    .country-name { font-size: 0.8rem; font-weight: 600; color: var(--gray-700); }
+    .country-export { font-size: 0.7rem; color: var(--gray-400); margin-top: 0.25rem; }
+
+    /* FEATURES */
+    .features-section { padding: 5rem 1.5rem; }
+    .features-inner { max-width: 1100px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .feature-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 1rem; padding: 2rem; transition: all 0.2s; }
+    .feature-card:hover { border-color: var(--emerald-400); box-shadow: 0 8px 24px rgba(16,185,129,0.08); }
+    .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.25rem; }
+    .fi-green { background: #ecfdf5; } .fi-blue { background: #eff6ff; } .fi-amber { background: #fffbeb; }
+    .fi-red { background: #fef2f2; } .fi-purple { background: #faf5ff; } .fi-gray { background: var(--gray-100); }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.6; }
+
+    /* STREAMS */
+    .streams-section { padding: 5rem 1.5rem; background: var(--gray-50); }
+    .streams-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .streams-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3rem; }
+    .stream-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 0.75rem; padding: 1.5rem; text-align: left; transition: all 0.2s; }
+    .stream-card:hover { border-color: var(--emerald-400); }
+    .stream-emoji { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .stream-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.375rem; }
+    .stream-method { font-size: 0.75rem; color: var(--emerald-600); font-weight: 600; margin-bottom: 0.375rem; }
+    .stream-card p { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
+
+    /* SCREENSHOTS */
+    .screenshots-section { padding: 5rem 1.5rem; }
+    .screenshots-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+
+    /* Hero-style full-width screenshot */
+    .ss-hero { margin-top: 3rem; margin-bottom: 3rem; }
+    .ss-card { border-radius: 1rem; border: 1px solid var(--gray-200); overflow: hidden; background: #fff; transition: all 0.2s; }
+    .ss-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+    .ss-card img { width: 100%; display: block; }
+    .ss-info { padding: 1.25rem 1.5rem; border-top: 1px solid var(--gray-100); text-align: left; }
+    .ss-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .ss-info p { font-size: 0.85rem; color: var(--gray-500); }
+
+    /* 2-col and 3-col screenshot grids */
+    .ss-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .ss-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .ss-card-tall .ss-img-wrap { display: flex; align-items: center; justify-content: center; background: var(--gray-50); padding: 2rem; }
+    .ss-card-tall .ss-img-wrap img { max-height: 320px; width: auto; margin: 0 auto; border-radius: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+    /* VVB WORKFLOW */
+    .vvb-section { padding: 5rem 1.5rem; background: var(--gray-50); }
+    .vvb-inner { max-width: 1100px; margin: 0 auto; }
+    .vvb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+    .vvb-steps { display: flex; flex-direction: column; gap: 1rem; }
+    .vvb-step { display: flex; gap: 1rem; align-items: flex-start; background: #fff; border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--gray-200); }
+    .vvb-num { min-width: 32px; height: 32px; border-radius: 50%; background: var(--emerald-600); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+    .vvb-step h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .vvb-step p { font-size: 0.8rem; color: var(--gray-500); }
+
+    /* ARCHITECTURE */
+    .arch-section { padding: 5rem 1.5rem; background: var(--gray-950); color: #fff; }
+    .arch-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .arch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3rem; }
+    .arch-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 1.5rem; text-align: left; }
+    .arch-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--emerald-400); }
+    .arch-card p { font-size: 0.8rem; color: var(--gray-400); line-height: 1.5; }
+    .tech-tag { display: inline-block; background: rgba(255,255,255,0.08); padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.7rem; color: var(--gray-300); margin: 0.125rem; }
+
+    /* CTA */
+    .cta-section { padding: 5rem 1.5rem; background: linear-gradient(135deg, var(--emerald-800), var(--gray-900)); text-align: center; color: #fff; }
+    .cta-inner { max-width: 700px; margin: 0 auto; }
+    .cta-section h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .cta-section p { color: rgba(255,255,255,0.7); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    .footer { padding: 3rem 1.5rem; background: var(--gray-950); color: var(--gray-400); text-align: center; font-size: 0.875rem; }
+    .footer a { color: var(--emerald-400); }
+    .footer a:hover { text-decoration: underline; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .cbam-grid, .vvb-grid, .ss-grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+      .ss-grid-3 { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .streams-grid { grid-template-columns: 1fr 1fr; }
+      .arch-grid { grid-template-columns: 1fr 1fr; }
+      .countries-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero h1 { font-size: 2rem; }
+      .cbam-section h2, .section-title, .cta-section h2 { font-size: 1.75rem; }
+    }
+    @media (max-width: 480px) {
+      .streams-grid, .arch-grid { grid-template-columns: 1fr; }
+      .countries-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">MRV</div>
+      MRVault
+    </a>
+    <div class="nav-links">
+      <a href="#cbam">CBAM</a>
+      <a href="#features">Features</a>
+      <a href="#streams">Streams</a>
+      <a href="#screenshots">Platform</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/nayyershahzad" target="_blank" class="btn btn-dark">
+        <svg class="gh-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      EU CBAM is NOW in effect &mdash; Full enforcement Jan 2026
+    </div>
+    <h1>Measure. Report. Verify.<br/><span>Earn Carbon Credits.</span></h1>
+    <p>MRVault is an open-source MRV platform that helps industrial manufacturers comply with EU CBAM, calculate IPCC-grade emissions across 8 streams, and earn blockchain-verified carbon credits.</p>
+    <div class="hero-buttons">
+      <a href="https://github.com/nayyershahzad" target="_blank" class="btn btn-primary btn-lg">
+        <svg class="gh-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+      <a href="#screenshots" class="btn btn-outline btn-lg">See it in action</a>
+    </div>
+    <div class="hero-screenshot">
+      <img src="screenshots/ipcc-calculator.png" alt="MRVault IPCC Emission Calculator — 8-stream boiler calculation with CO2e results, carbon credits, and emission breakdown" />
+    </div>
+    <span class="screenshot-label">IPCC Emission Calculator &mdash; 8 streams, IPCC Tier 1 methodology, real-time CO&#x2082;e &amp; carbon credit calculation</span>
+  </div>
+</section>
+
+<!-- CBAM URGENCY -->
+<section class="cbam-section" id="cbam">
+  <div class="cbam-inner">
+    <div class="cbam-grid">
+      <div>
+        <div class="cbam-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          REGULATORY DEADLINE
+        </div>
+        <h2>CBAM is not coming.<br/><em>It's already here.</em></h2>
+        <p class="cbam-text">The EU Carbon Border Adjustment Mechanism requires all exporters of steel, cement, aluminium, fertilizers, electricity, and hydrogen to report embedded emissions. <strong>Textile manufacturers</strong> face indirect exposure through energy costs &mdash; and direct scope as the EU expands CBAM downstream.</p>
+        <p class="cbam-text">Without a certified MRV system, your exports face <strong>carbon tariffs of &euro;50&ndash;100+ per tonne CO&#x2082;</strong>. MRVault gives you the IPCC-grade calculation engine and immutable audit trail regulators demand.</p>
+      </div>
+      <div>
+        <div class="timeline">
+          <div class="tl-item done"><div><div class="tl-year">Oct 2023</div><div class="tl-text"><strong>CBAM Transitional Phase begins</strong><br/>EU importers must report embedded emissions quarterly</div></div></div>
+          <div class="tl-item now"><div><div class="tl-year">Jan 2026</div><div class="tl-text"><strong>Full CBAM enforcement</strong><br/>Importers must purchase CBAM certificates. Non-compliant exporters locked out of EU market</div></div></div>
+          <div class="tl-item"><div><div class="tl-year">2027</div><div class="tl-text"><strong>Free allowances phase out begins</strong><br/>Financial impact escalates year-over-year as EU ETS free allocation shrinks</div></div></div>
+          <div class="tl-item"><div><div class="tl-year">2030+</div><div class="tl-text"><strong>Scope expansion expected</strong><br/>Textiles, chemicals, polymers likely added per EU legislative roadmap</div></div></div>
+          <div class="tl-item"><div><div class="tl-year">2034</div><div class="tl-text"><strong>100% CBAM, zero free allowances</strong><br/>Full carbon cost at border. MRV is not optional &mdash; it's survival</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRIES -->
+<section class="countries-section">
+  <div class="countries-inner">
+    <div class="section-overline">Global Impact</div>
+    <h2 class="section-title">CBAM Affects Every Country Exporting to the EU</h2>
+    <p class="section-subtitle">MRVault is designed for manufacturers in any country. Pakistan, India, Bangladesh, Turkey &mdash; if you export to the EU, you need MRV.</p>
+    <div class="countries-grid">
+      <div class="country-card"><div class="country-flag">&#127477;&#127472;</div><div class="country-name">Pakistan</div><div class="country-export">Textiles, Cement, Steel</div></div>
+      <div class="country-card"><div class="country-flag">&#127470;&#127475;</div><div class="country-name">India</div><div class="country-export">Steel, Aluminium, Cement</div></div>
+      <div class="country-card"><div class="country-flag">&#127463;&#127465;</div><div class="country-name">Bangladesh</div><div class="country-export">Textiles, Garments</div></div>
+      <div class="country-card"><div class="country-flag">&#127481;&#127479;</div><div class="country-name">Turkey</div><div class="country-export">Steel, Cement, Aluminium</div></div>
+      <div class="country-card"><div class="country-flag">&#127464;&#127475;</div><div class="country-name">China</div><div class="country-export">Steel, Aluminium, Chemicals</div></div>
+      <div class="country-card"><div class="country-flag">&#127482;&#127462;</div><div class="country-name">Ukraine</div><div class="country-export">Steel, Iron, Electricity</div></div>
+      <div class="country-card"><div class="country-flag">&#127479;&#127482;</div><div class="country-name">Russia</div><div class="country-export">Steel, Aluminium, Fertilizers</div></div>
+      <div class="country-card"><div class="country-flag">&#127487;&#127462;</div><div class="country-name">South Africa</div><div class="country-export">Steel, Aluminium</div></div>
+      <div class="country-card"><div class="country-flag">&#127466;&#127468;</div><div class="country-name">Egypt</div><div class="country-export">Fertilizers, Steel</div></div>
+      <div class="country-card"><div class="country-flag">&#127483;&#127475;</div><div class="country-name">Vietnam</div><div class="country-export">Steel, Textiles</div></div>
+      <div class="country-card"><div class="country-flag">&#127463;&#127479;</div><div class="country-name">Brazil</div><div class="country-export">Steel, Aluminium</div></div>
+      <div class="country-card"><div class="country-flag">&#127470;&#127465;</div><div class="country-name">Indonesia</div><div class="country-export">Steel, Aluminium</div></div>
+    </div>
+    <p style="font-size: 0.85rem; color: var(--gray-500);">And 30+ more countries. MRVault's IPCC methodology is jurisdiction-agnostic &mdash; plug in your local emission factors and regulatory limits.</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="features-inner">
+    <div style="text-align:center;">
+      <div class="section-overline">Platform Capabilities</div>
+      <h2 class="section-title">Everything You Need for CBAM Compliance</h2>
+      <p class="section-subtitle">From raw meter readings to blockchain-minted carbon credits &mdash; one platform handles the entire MRV lifecycle.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon fi-green"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>IPCC Tier 1 Calculations</h3>
+        <p>8 emission streams calculated per IPCC 2006 Guidelines. Boiler fuel combustion, solar displacement, wastewater methane, dairy, refrigeration, solid waste, chemical tracking, and electricity EE.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <h3>Blockchain Verification</h3>
+        <p>Every verified credit minted as ERC-721 NFT on Polygon. Immutable audit trail with IPFS document anchoring, SHA-256 evidence hashing, and Polygonscan-verifiable records.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-amber"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3>Evidence Management</h3>
+        <p>Upload fuel invoices, calibration certs, stack test reports, and energy audits. Every calculation backed by verifiable evidence with stream-specific document types.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-red"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <h3>Regulatory Compliance</h3>
+        <p>Built-in NEQS emission limits, Boiler Act registration tracking, EPA compliance reporting. Configurable per jurisdiction &mdash; Pakistan, India, Bangladesh, or any country.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-purple"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg></div>
+        <h3>VVB Audit Workflow</h3>
+        <p>Dedicated Verification &amp; Validation Body portal. Auditors review evidence, raise CARs/CLs/FARs, approve or reject calculations, and trigger blockchain minting.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-gray"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Live IoT Integration</h3>
+        <p>MQTT-based real-time data from electricity, water, steam meters, and solar inverters. Auto-ingestion eliminates manual data entry errors with 24h sparkline charts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMISSION STREAMS -->
+<section class="streams-section" id="streams">
+  <div class="streams-inner">
+    <div class="section-overline">Multi-Stream MRV</div>
+    <h2 class="section-title">8 IPCC Emission Streams, One Platform</h2>
+    <p class="section-subtitle">Each stream follows a 3-tab workflow: Calculate &rarr; Compliance &rarr; History. Every calculation can be saved, evidenced, verified, and minted to blockchain.</p>
+    <div class="streams-grid">
+      <div class="stream-card"><div class="stream-emoji">&#128293;</div><h4>Boiler Fuel Combustion</h4><div class="stream-method">AMS-II.D &mdash; Fuel Switching</div><p>Natural gas, HFO, coal with IPCC factors and boiler efficiency adjustment.</p></div>
+      <div class="stream-card"><div class="stream-emoji">&#9728;&#65039;</div><h4>Solar PV</h4><div class="stream-method">AMS-I.D &mdash; Grid-connected RE</div><p>Solar generation displaces grid electricity. Credits = kWh &times; Grid EF.</p></div>
+      <div class="stream-card"><div class="stream-emoji">&#9889;</div><h4>Electricity EE</h4><div class="stream-method">AMS-II.C &mdash; Demand-side EE</div><p>VSD installation, motor replacement, efficient lighting baseline vs project.</p></div>
+      <div class="stream-card"><div class="stream-emoji">&#128167;</div><h4>Wastewater</h4><div class="stream-method">AMS-III.H &mdash; Methane Avoidance</div><p>Aerobic treatment methane avoidance. COD/BOD-based calculations.</p></div>
+      <div class="stream-card"><div class="stream-emoji">&#128300;</div><h4>Chemicals (ESG)</h4><div class="stream-method">GHG Protocol Scope 3</div><p>Chemical inventory for OEKO-TEX STeP Module 1. ESG reporting.</p></div>
+      <div class="stream-card"><div class="stream-emoji">&#128465;</div><h4>Solid Waste</h4><div class="stream-method">AMS-III.E/L &mdash; Waste Diversion</div><p>Recycling and landfill diversion. GRS/RCS certification tracking.</p></div>
+      <div class="stream-card"><div class="stream-emoji">&#128004;</div><h4>Dairy</h4><div class="stream-method">AMS-III.D &mdash; Manure Mgmt</div><p>Livestock methane from enteric fermentation and manure. Biogas credits.</p></div>
+      <div class="stream-card"><div class="stream-emoji">&#10052;&#65039;</div><h4>Refrigeration</h4><div class="stream-method">AM0065 &mdash; HFC Phase-down</div><p>Fugitive HFC/HCFC from cooling. Leak detection, GWP-weighted calcs.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section" id="screenshots">
+  <div class="screenshots-inner">
+    <div class="section-overline">See It In Action</div>
+    <h2 class="section-title">Built for Real Industrial Operations</h2>
+    <p class="section-subtitle">Every screen designed for plant operators, engineers, and VVB auditors &mdash; not consultants with spreadsheets.</p>
+
+    <!-- Row 1: VVB Dashboard (full width hero) -->
+    <div class="ss-hero">
+      <div class="ss-card">
+        <img src="screenshots/vvb-dashboard.png" alt="VVB Audit Dashboard with calculation summary cards, stream and status filters, and verification table" />
+        <div class="ss-info">
+          <h4>VVB Audit Dashboard</h4>
+          <p>Summary KPIs (64 calculations, 113K tCO&#x2082;e tracked, 17K verified credits), stream &amp; status filter tabs, sortable calculation table with evidence and findings counts.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Evidence Upload + VVB Verification (2 col) -->
+    <div class="ss-grid-2">
+      <div class="ss-card">
+        <img src="screenshots/evidence-upload.png" alt="Evidence upload interface showing stream-specific document types like Sui Gas Bill, HFO Invoice, Calibration Certificate" />
+        <div class="ss-info">
+          <h4>Evidence Upload &amp; Tracking</h4>
+          <p>Stream-specific evidence types (gas bills, fuel invoices, calibration certs, stack test reports). Upload after saving any calculation to begin the verification process.</p>
+        </div>
+      </div>
+      <div class="ss-card">
+        <img src="screenshots/vvb-verification.png" alt="VVB expanded verification row showing calculation details, evidence documents, and approve/reject controls" />
+        <div class="ss-info">
+          <h4>VVB Verification &amp; Evidence Review</h4>
+          <p>Auditors expand any row to review calculation details, evidence documents with category badges, raise findings, then approve or reject with one click.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: Blockchain Credit + Dossier Generator (different height, use special layout) -->
+    <div class="ss-grid-2">
+      <div class="ss-card ss-card-tall">
+        <div class="ss-img-wrap">
+          <img src="screenshots/blockchain-credit.png" alt="On-Chain Carbon Credit minted on Polygon showing serial number, TX hash, and IPFS metadata with Polygonscan link" />
+        </div>
+        <div class="ss-info">
+          <h4>On-Chain Carbon Credits (Polygon)</h4>
+          <p>Verified credits minted as ERC-721 NFTs. Serial number (PK0001-IPCC-TEX-1-0-2026), TX hash on Polygonscan, IPFS metadata CID &mdash; immutable and tradeable.</p>
+        </div>
+      </div>
+      <div class="ss-card">
+        <img src="screenshots/dossier-generator.png" alt="Dossier Generator with 6 report types: Internal Carbon Pricing, Buyer Transparency, Pre-Feasibility, Monitoring, Compliance, VVB Package" />
+        <div class="ss-info">
+          <h4>AI-Powered Dossier Generator</h4>
+          <p>6 VVB-ready report types generated on demand: Internal Carbon Pricing, Buyer Transparency Package, Pre-Feasibility Report, Monitoring, Regulatory Compliance, and full VVB Verification Package.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VVB WORKFLOW -->
+<section class="vvb-section">
+  <div class="vvb-inner">
+    <div style="text-align:center;">
+      <div class="section-overline">Verification Workflow</div>
+      <h2 class="section-title">From Raw Data to Verified Credits</h2>
+      <p class="section-subtitle">The full MRV lifecycle &mdash; calculate, evidence, verify, mint &mdash; all in one platform.</p>
+    </div>
+    <div class="vvb-grid">
+      <div class="vvb-steps">
+        <div class="vvb-step"><div class="vvb-num">1</div><div><h4>Calculate Emissions</h4><p>Plant engineer enters fuel, production data. IPCC Tier 1 engine calculates CO&#x2082;e and potential credits per stream.</p></div></div>
+        <div class="vvb-step"><div class="vvb-num">2</div><div><h4>Attach Evidence</h4><p>Upload fuel invoices, meter readings, calibration certs. Each evidence type is stream-specific with category tagging.</p></div></div>
+        <div class="vvb-step"><div class="vvb-num">3</div><div><h4>VVB Reviews &amp; Raises Findings</h4><p>Independent auditor (SGS, Bureau Veritas, Earthood) reviews calculations and evidence. Raises CARs, CLs, or FARs.</p></div></div>
+        <div class="vvb-step"><div class="vvb-num">4</div><div><h4>Plant Responds</h4><p>Plant manager addresses each finding with corrective action. Lifecycle: Open &rarr; Responded &rarr; Closed.</p></div></div>
+        <div class="vvb-step"><div class="vvb-num">5</div><div><h4>Approve &amp; Mint to Blockchain</h4><p>VVB approves. Credits minted as ERC-721 NFTs on Polygon with IPFS-anchored evidence. Immutable and tradeable.</p></div></div>
+      </div>
+      <div class="ss-card">
+        <img src="screenshots/vvb-verification.png" alt="VVB verification expanded row with evidence documents and approve/reject buttons" />
+        <div class="ss-info">
+          <h4>VVB Expanded Verification View</h4>
+          <p>Complete audit trail: calculation inputs, result summary, uploaded evidence with category badges, findings panel, and approve/reject controls.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="arch-section" id="architecture">
+  <div class="arch-inner">
+    <div class="section-overline" style="color: var(--emerald-400);">Technical Architecture</div>
+    <h2 class="section-title" style="color:#fff;">Production-Grade Stack</h2>
+    <p class="section-subtitle" style="color: var(--gray-400);">Dockerized for one-command deployment. Extensible to any industry vertical.</p>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <h4>Backend API</h4>
+        <p>FastAPI with async endpoints, SQLAlchemy ORM, PostGIS, Redis caching, Celery for async AI/ML processing.</p>
+        <div style="margin-top:0.75rem;"><span class="tech-tag">FastAPI</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Redis</span><span class="tech-tag">Celery</span></div>
+      </div>
+      <div class="arch-card">
+        <h4>Frontend Portals</h4>
+        <p>React + Vite + Tailwind. Separate portals per industry (Textile, Cement, Auto, REIT, Fertilizer). JWT auth.</p>
+        <div style="margin-top:0.75rem;"><span class="tech-tag">React 18</span><span class="tech-tag">Vite 5</span><span class="tech-tag">Tailwind</span><span class="tech-tag">TypeScript</span></div>
+      </div>
+      <div class="arch-card">
+        <h4>IPCC Calc Engine</h4>
+        <p>Standalone microservice. Industry-specific emission factors, GWP constants, IPCC methodology references.</p>
+        <div style="margin-top:0.75rem;"><span class="tech-tag">FastAPI</span><span class="tech-tag">IPCC 2006</span><span class="tech-tag">GHG Protocol</span></div>
+      </div>
+      <div class="arch-card">
+        <h4>Blockchain &amp; IoT</h4>
+        <p>Polygon ERC-721 for credit NFTs. IPFS via Pinata. MQTT brokers for real-time sensor ingestion.</p>
+        <div style="margin-top:0.75rem;"><span class="tech-tag">Polygon</span><span class="tech-tag">IPFS</span><span class="tech-tag">MQTT</span><span class="tech-tag">Solidity</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <h2>Don't Wait for CBAM to Hit Your Bottom Line</h2>
+    <p>Every day without MRV is a day your exports lose competitiveness in EU markets. MRVault is open-source, industry-proven, and ready to deploy.</p>
+    <div class="cta-buttons">
+      <a href="https://github.com/nayyershahzad" target="_blank" class="btn btn-white btn-lg">
+        <svg class="gh-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Star on GitHub
+      </a>
+      <a href="mailto:931nayyer@gmail.com" class="btn btn-lg" style="background: rgba(255,255,255,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        931nayyer@gmail.com
+      </a>
+    </div>
+    <p style="margin-top:2rem; font-size:0.9rem; color: rgba(255,255,255,0.5);">Interested in a demo, partnership, or deploying MRVault for your factory? Drop us an email.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>MRVault &mdash; Open-source MRV platform for CBAM compliance &amp; carbon credit verification</p>
+  <p style="margin-top:0.5rem;">
+    <a href="https://github.com/nayyershahzad">GitHub</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:931nayyer@gmail.com">931nayyer@gmail.com</a> &nbsp;&middot;&nbsp;
+    IPCC 2006 Guidelines &nbsp;&middot;&nbsp;
+    EU CBAM Regulation (EU) 2023/956
+  </p>
+</footer>
+
+</body>
+</html>
